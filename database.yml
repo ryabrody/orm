@@ -1,3 +1,4 @@
 host: 'localhost'
 username: 'root'
 database: 'rails_app_development'
+application_timezone: 'local'

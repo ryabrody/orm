@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative 'transformer'
+require_relative '../transformer'
 
 describe '#tableize' do
   it 'returns tableized string of class "DummyClass"' do
