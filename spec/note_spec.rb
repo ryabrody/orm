@@ -11,10 +11,6 @@ describe Note do
     expect(Note.table).to eq('notes')
   end
 
-  it 'has a class_method called client' do
-    expect(Note.client).to be_an_instance_of(Mysql2::Client)
-  end
-
   it 'has a class_method called fields' do
     expect(Note.fields).to eq %w(id title body created_at updated_at)
   end
@@ -43,7 +39,7 @@ describe Note do
 
   it 'reads all notes' do
     note.create
-    expect(Note.all).to eq('asdf')
+    expect(Note.all.count).to eq(3)
   end
 
   # TODO type validation
