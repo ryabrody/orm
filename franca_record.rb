@@ -17,7 +17,12 @@ class FrancaRecord
     values = self.class.fields.map { |field| self.send(field) }
     data = data(self.class.fields, values)
 
+
     Database.instance.client.query("INSERT INTO #{self.class.table} (#{data.keys.join(', ')}) VALUES (#{data.values.join(', ')});")
+    #client.last_id
+  end
+
+  def update(data)
   end
 
   def self.fields
@@ -45,6 +50,7 @@ class FrancaRecord
   end
 end
 
+# refactore self.class stuff
 # check data
 # mysql -h localhost -u root -p rails_app_development
 # desc notes;

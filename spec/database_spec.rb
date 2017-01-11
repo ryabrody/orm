@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Database do
-
   let(:database) { Database.instance }
 
   it 'initializes a database' do

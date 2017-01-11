@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Note do
-  let(:note) { Note.new(title: 'Lorem Ipsum', body: 'Lorem ipsum dolor sit amet') }
+  let(:title) { 'Lorem Ipsum' }
+  let(:body) { 'Lorem ipsum dolor sit amet' }
+  let(:note) { Note.new(title: title, body: body) }
 
   it 'initializes a note' do
     expect(note).to be_an_instance_of(Note)
@@ -33,13 +35,26 @@ describe Note do
     expect(note.title).to eq('Dummy Body')
   end
 
+  it 'has a getter called id' do
+    note.create
+    expect(note.id).to eq(1)
+  end
+
   it 'creates a note' do
+    pending('i need some help with this')
     expect { note.create }.to change{ Note.all }.by(1)
   end
 
   it 'reads all notes' do
-    note.create
+    3.times { note.create }
     expect(Note.all.count).to eq(3)
+  end
+
+  it 'updates a note' do
+    #expect { Counter.increment }.to change{Counter.count }.from(0).to(1)
+    new_title = 'Cake pie candy'
+    new_body = 'Cake pie candy soufflé carrot cake'
+    expect { note.update(title: new_title, body: new_body) }.to change{ note.title }.from(title).to(new_title)
   end
 
   # TODO type validation

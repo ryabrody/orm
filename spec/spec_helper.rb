@@ -33,7 +33,7 @@ RSpec.configure do |config|
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
 
-    config.before(:suite) do
+    config.before(:example) do
       Database.instance.tables.each do |table|
         Database.instance.client.query("TRUNCATE #{table};")
       end
