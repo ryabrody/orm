@@ -1,10 +1,9 @@
 require 'pry'
 require_relative 'transformer'
+require_relative 'database'
 
 class FrancaRecord
   extend Transformer
-
-  #attr_reader :table, :client, :fields
 
   def initialize(attributes = {})
     self.class.fields.each do |field|
@@ -17,9 +16,8 @@ class FrancaRecord
     values = self.class.fields.map { |field| self.send(field) }
     data = data(self.class.fields, values)
 
-
     Database.instance.client.query("INSERT INTO #{self.class.table} (#{data.keys.join(', ')}) VALUES (#{data.values.join(', ')});")
-    #client.last_id
+    self.id = Database.instance.client.last_id
   end
 
   def update(data)

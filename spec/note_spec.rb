@@ -41,8 +41,12 @@ describe Note do
   end
 
   it 'creates a note' do
-    pending('i need some help with this')
-    expect { note.create }.to change{ Note.all }.by(1)
+    expect { note.create }.to change { Note.all.size }.by(1)
+  end
+
+  it 'adds a value to id when createing a note' do
+    note.create
+    expect(note.id).to be_a(Integer)
   end
 
   it 'reads all notes' do

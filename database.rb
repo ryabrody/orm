@@ -8,11 +8,11 @@ class Database
   attr_reader :client, :tables
 
   def initialize
-    @client = client
-    @tables = tables
+    #@client = Mysql2::Client.new(YAML.load_file('database.yml'))
+    @client = init_client
   end
 
-  def client
+  def init_client
     begin
       Mysql2::Client.new(YAML.load_file('database.yml'))
     rescue Mysql2::Error => e
