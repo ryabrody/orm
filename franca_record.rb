@@ -21,6 +21,16 @@ class FrancaRecord
   end
 
   def update(data)
+    formatted_data = data.map{ |key, value| "#{key}='#{value}'" }.join(',')
+    Database.instance.client.query("Update #{self.class.table} SET #{formatted_data} WHERE id=#{self.id};")
+    data.each { |key, value| self.send("#{key.to_s}=", value) }
+  end
+
+  def delete
+    Database.instance.client.query("DELETE FROM #{self.class.table} WHERE id=#{self.id};")
+    # is it possible to delte a class_instance?
+    #binding.pry
+    #self
   end
 
   def self.fields

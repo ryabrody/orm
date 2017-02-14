@@ -50,15 +50,24 @@ describe Note do
   end
 
   it 'reads all notes' do
-    3.times { note.create }
+    note_2 = Note.new(title: 'Gummies biscuit', body: 'Danish cupcake chocolate bar')
+    note_3 = Note.new(title: 'Toffee bear', body: 'Sweet lemon drops tiramisu')
+    note.create
+    note_2.create
+    note_3.create
     expect(Note.all.count).to eq(3)
   end
 
   it 'updates a note' do
-    #expect { Counter.increment }.to change{Counter.count }.from(0).to(1)
+    note.create
     new_title = 'Cake pie candy'
     new_body = 'Cake pie candy soufflé carrot cake'
     expect { note.update(title: new_title, body: new_body) }.to change{ note.title }.from(title).to(new_title)
+  end
+
+  it 'deletes a note' do
+    note.create
+    expect { note.delete }.to change{ Note.all.count }.by(-1)
   end
 
   # TODO type validation
